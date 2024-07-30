@@ -19,25 +19,6 @@ Create an IAM role with the following permissions:
 - **AmazonPollyReadOnlyAccess**
 - **AWSLambdaBasicExecutionRole**
 
-IAM Role Policy Document:
-```JSON
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sts:AssumeRole"
-            ],
-            "Principal": {
-                "Service": [
-                    "lambda.amazonaws.com"
-                ]
-            }
-        }
-    ]
-}
-```
 
 ### 2. Create the Lambda Function (`Text2Speech_Function`)
 - **Runtime**: Python 3.12
@@ -48,7 +29,7 @@ IAM Role Policy Document:
 ```JSON
 {
   "text": "Hello, this is a test of the text-to-speech system.",
-  "language": "ja-JP"
+  "language": "en-US"
 }
 ```
 
