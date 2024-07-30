@@ -29,7 +29,7 @@
             <option valve="ko-KR" name="ko-KR">Korean</option>
         </select>
         <br>
-        <button id="transcribeButton">Transcribe</button>
+        <button id="synthesizationButton">Synthesize</button>
         <br>
         <audio id="audioPlayer" controls style="display: none;"></audio>
     </div>
@@ -37,7 +37,7 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const audioPlayer = document.getElementById('audioPlayer');
 
-            document.getElementById('transcribeButton').addEventListener('click', function () {
+            document.getElementById('synthesizationButton').addEventListener('click', function () {
                 const textInput = document.getElementById('textInput').value; // Get the value of the text input
                 const languageSelect = document.getElementById('languageSelect');
                 
@@ -84,7 +84,7 @@
                     })
                     .catch((error) => {
                         console.error("Error:", error);
-                        alert("An error occurred during transcription. Please try again.");
+                        alert("An error occurred during synthesization. Please try again.");
                     });
             };
 
