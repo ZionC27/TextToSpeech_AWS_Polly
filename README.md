@@ -59,7 +59,8 @@ fetch("Invoke URL", requestOptions)
 5. Create an AWS amplify app
    - Create new app
    - Choose Deploy without git
-   - Then drag the zip file or choose zip folder -> Save and deploy 
+   - Then drag the zip file or choose zip folder -> Save and deploy
+   - Press Visit deployed URL or Domain URL
   
 6. Test the website
    - Type a sentence that you want to synthesize
