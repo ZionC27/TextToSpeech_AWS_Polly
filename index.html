@@ -26,6 +26,7 @@
             <option value="en-US">English</option>
             <option value="zh-CN">Mandarin</option>
             <option value="ja-JP">Japanese</option>
+            <option valve="ko-KR">Korean</option>
         </select>
         <br>
         <button id="transcribeButton">Transcribe</button>
@@ -60,7 +61,7 @@
                 fetch("https://mlsjr84gw0.execute-api.us-east-2.amazonaws.com/dev/", requestOptions)
                     .then((response) => response.json())
                     .then((result) => {
-                        
+
                         // Format the response as JSON
                         const bodyObject = JSON.parse(result.body);
                         const audioData = bodyObject.audio_data;
