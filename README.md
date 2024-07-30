@@ -49,10 +49,19 @@ https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-Synt
    - Copy Invoke URL in a Notepad ***https://mlsjr84gw0.execute-api.us-east-2.amazonaws.com/dev
   
 4. Create a Website (index.html)
-   - Copy the provided code
-   - Replace Invoke URL in line 61 to your own URL !!! remember that the URL form API Gateway ends with /dev but you need to add a backslash at the end Like /dev/
+   - Use a text editor like VS and create a HTML file name index.html and Copy the provided code
+   - Replace Invoke URL in line 70 to your own URL !!! remember that the URL form API Gateway ends with /dev but you need to add a backslash at the end Like /dev/
 ```js
 fetch("Invoke URL", requestOptions)
 ```
-5. Test the website
+   - Using File Explorer right click on index.html and compress to ZIP file !!! Must be in zip file it cannot be in rar or other type 
+
+5. Create an AWS amplify app
+   - Create new app
+   - Choose Deploy without git
+   - Then drag the zip file or choose zip folder -> Save and deploy 
   
+6. Test the website
+   - Type a sentence that you want to synthesize
+   - Choose a language
+   - Press synthesize to hear!
