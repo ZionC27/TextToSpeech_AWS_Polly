@@ -29,7 +29,7 @@ Create an IAM role with the following permissions:
 ```JSON
 {
   "text": "Hello, this is a test of the text-to-speech system.",
-  "language": "ja-JP"
+  "language": "en-US"
 }
 ```
 
