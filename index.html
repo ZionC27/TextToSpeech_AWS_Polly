@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lorem Ipsum</h1>
+        <textarea id="textInput" rows="10" cols="50" placeholder="Enter text here..."></textarea>
+        <br>
+        <select id="languageSelect">
+            <option value="en-US">English</option>
+            <option value="zh-CN">Mandarin</option>
+            <option value="ja-JP">Japanese</option>
+        </select>
+        <br>
+        <button id="transcribeButton">Transcribe</button>
+    </div>
+    <script>
+        // Basic JavaScript to handle button click (replace with actual transcription logic)
+        document.getElementById('transcribeButton').addEventListener('click', function() {
+            const text = document.getElementById('textInput').value;
+            const language = document.getElementById('languageSelect').value;
+            alert('Transcribing: "' + text + '" to ' + language);
+            // Add your transcription code here
+        });
+    </script>
+</body>
+</html>
