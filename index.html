@@ -23,10 +23,10 @@
         <textarea id="textInput" rows="10" cols="50" placeholder="Enter text here..."></textarea>
         <br>
         <select id="languageSelect">
-            <option value="en-US">English</option>
-            <option value="zh-CN">Mandarin</option>
-            <option value="ja-JP">Japanese</option>
-            <option valve="ko-KR">Korean</option>
+            <option value="en-US" name="en-US">English</option>
+            <option value="zh-CN" name="zh-CN">Mandarin</option>
+            <option value="ja-JP" name="ja-JP">Japanese</option>
+            <option valve="ko-KR" name="ko-KR">Korean</option>
         </select>
         <br>
         <button id="transcribeButton">Transcribe</button>
@@ -38,11 +38,20 @@
             const audioPlayer = document.getElementById('audioPlayer');
 
             document.getElementById('transcribeButton').addEventListener('click', function () {
-                const text = document.getElementById('textInput').value;
-                const language = document.getElementById('languageSelect').value;
-                callAPIForAudio(text, language);
-            });
+                const textInput = document.getElementById('textInput').value; // Get the value of the text input
+                const languageSelect = document.getElementById('languageSelect');
+                
+                // Get the selected option
+                const selectedOption = languageSelect.selectedOptions[0];
+                
+                // Get the value of the `name` attribute of the selected option
+                const languageName = selectedOption.getAttribute('name');
+                
+                console.log(textInput, languageName); // Log text input and language name
 
+                // Call the API with text input and language name
+                callAPIForAudio(textInput, languageName);
+            });
             const callAPIForAudio = (text, language) => {
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
@@ -61,7 +70,7 @@
                 fetch("https://mlsjr84gw0.execute-api.us-east-2.amazonaws.com/dev/", requestOptions)
                     .then((response) => response.json())
                     .then((result) => {
-
+                        console.log(result);
                         // Format the response as JSON
                         const bodyObject = JSON.parse(result.body);
                         const audioData = bodyObject.audio_data;
