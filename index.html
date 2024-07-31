@@ -7,51 +7,94 @@
     <style>
         body {
             font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
         }
+
         .container {
-            width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        select {
+            margin-top: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #audioPlayer {
+            margin-top: 20px;
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Text to Speech</h1>
-        <textarea id="textInput" rows="10" cols="50" placeholder="Enter text here..."></textarea>
-        <br>
+        <textarea id="textInput" placeholder="Enter text here..."></textarea>
         <select id="languageSelect">
             <option value="en-US" name="en-US">English</option>
             <option value="zh-CN" name="zh-CN">Mandarin</option>
             <option value="ja-JP" name="ja-JP">Japanese</option>
-            <option valve="ko-KR" name="ko-KR">Korean</option>
+            <option value="ko-KR" name="ko-KR">Korean</option>
         </select>
-        <br>
         <button id="synthesizationButton">Synthesize</button>
-        <br>
-        <audio id="audioPlayer" controls style="display: none;"></audio>
+        <audio id="audioPlayer" controls></audio>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const audioPlayer = document.getElementById('audioPlayer');
+            const synthesizeButton = document.getElementById('synthesizationButton');
 
-            document.getElementById('synthesizationButton').addEventListener('click', function () {
-                const textInput = document.getElementById('textInput').value; // Get the value of the text input
+            synthesizeButton.addEventListener('click', function() {
+                const textInput = document.getElementById('textInput').value.trim();
                 const languageSelect = document.getElementById('languageSelect');
-                
-                // Get the selected option
-                const selectedOption = languageSelect.selectedOptions[0];
-                
-                // Get the value of the `name` attribute of the selected option
-                const languageName = selectedOption.getAttribute('name');
-                
-                console.log(textInput, languageName); // Log text input and language name
+                const languageName = languageSelect.selectedOptions[0].getAttribute('name');
 
-                // Call the API with text input and language name
+                if (textInput === "") return; // Prevent API call with empty input
+
                 callAPIForAudio(textInput, languageName);
+                synthesizeButton.disabled = true;
+                synthesizeButton.textContent = "Synthesizing...";
             });
+
             const callAPIForAudio = (text, language) => {
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
@@ -70,11 +113,8 @@
                 fetch("Invoke URL", requestOptions)
                     .then((response) => response.json())
                     .then((result) => {
-                        console.log(result);
-                        // Format the response as JSON
                         const bodyObject = JSON.parse(result.body);
                         const audioData = bodyObject.audio_data;
-                        console.log(audioData);
 
                         if (audioData) {
                             playAudio(audioData);
@@ -85,19 +125,17 @@
                     .catch((error) => {
                         console.error("Error:", error);
                         alert("An error occurred during synthesization. Please try again.");
+                    })
+                    .finally(() => {
+                        synthesizeButton.disabled = false;
+                        synthesizeButton.textContent = "Synthesize";
                     });
             };
 
             const playAudio = (base64Audio) => {
-                if (audioPlayer) {
-                    const audioData = 'data:audio/mp3;base64,' + base64Audio;
-                    audioPlayer.src = audioData;
-                    audioPlayer.style.display = 'block';
-                    audioPlayer.play();
-                } else {
-                    console.error("Audio player element not found");
-                    alert("Unable to play audio. Audio player not found on the page.");
-                }
+                const audioData = 'data:audio/mp3;base64,' + base64Audio;
+                audioPlayer.src = audioData;
+                audioPlayer.play();
             };
         });
     </script>
