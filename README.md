@@ -64,3 +64,8 @@ Create an IAM role with the following permissions:
 
 ## Additional Information
 For more details on the `SynthesizeSpeech` API, refer to the [Polly SynthesizeSpeech documentation](https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-LanguageCode).
+
+## Website Screenshots
+
+![ss1](https://github.com/ZionC27/TextToSpeech_AWS_Polly/blob/main/Screenshot1.png)
+![ss2](https://github.com/ZionC27/TextToSpeech_AWS_Polly/blob/main/Screenshot2.png)
