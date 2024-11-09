@@ -34,6 +34,7 @@ Create an IAM role with the following permissions:
 ```
 
 ### 3. Create API Gateway
+- **Choose REST API**
 - **API Endpoint Type**: Edge-optimized
 - **Method**: POST
   - **Integration Type**: Lambda Function
